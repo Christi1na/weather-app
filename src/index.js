@@ -29,34 +29,6 @@ if (getMinutes.innerHTML.length === 1) {
   getMinutes.innerHTML = `0${minutes}`;
 }
 
-// let dateElement = document.querySelector('#date');
-// let currentTime = new Date();
-// dateElement.innerHTML = formatDate(currentTime);
-// function formatDate(date) {
-//   let hours = date.getHours();
-//   if (hours < 10) {
-//     hours = `0${hours}`;
-//   }
-//   let minutes = date.getMinutes();
-//   if (minutes < 10) {
-//     minutes = `0${minutes}`;
-//   }
-
-//   let dayIndex = date.getDay();
-//   let days = [
-//     'Sunday',
-//     'Monday',
-//     'Tuesday',
-//     'Wednesday',
-//     'Thursday',
-//     'Friday',
-//     'Saturday',
-//   ];
-//   let day = days[dayIndex];
-
-//   return `${day} ${hours}:${minutes}`;
-// }
-
 let apiKey = '6a0bac9dced487830ce6066218a5481c';
 let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?';
 let form = document.querySelector('#form');
