@@ -1,0 +1,44 @@
+.container {
+  max-width: 800px;
+  padding-top: 20px;
+}
+
+.card-text,
+.card-title {
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+
+.box {
+  padding: 30px;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 4px;
+}
+
+.list-group-horizontal {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.list-group-horizontal > .list-group-item + .list-group-item {
+  border-left-width: 1px;
+}
+
+.list-group-item {
+  border-radius: 4px;
+}
+
+.links {
+  display: inline-block;
+  font-size: 50%;
+  vertical-align: top;
+}
+
+.link {
+  text-decoration: none;
+}
