@@ -42,3 +42,8 @@ img {
 .link {
   text-decoration: none;
 }
+
+.open-source {
+  text-align: center;
+  margin-top: 20px;
+}
