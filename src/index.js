@@ -34,20 +34,37 @@ let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?';
 let form = document.querySelector('#form');
 let currentLocation = document.querySelector('#current-location-button');
 
+function search(city) {
+  axios
+    .get(`${apiUrl}q=${city}&appid=${apiKey}&units=metric`)
+    .then(showTemperature);
+}
+search('New York');
+
 function showTemperature(response) {
   document.querySelector('#temperature').innerHTML = Math.round(
     response.data.main.temp
   );
+  celsiusTemperature = response.data.main.temp;
+
   document.querySelector('#city').innerHTML = response.data.name;
-  document.querySelector('#clouds').innerHTML = response.data.weather[0].main;
+  document.querySelector('#description').innerHTML =
+    response.data.weather[0].description;
+  document.querySelector(
+    '#icon'
+  ).src = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
+  document
+    .querySelector('#icon')
+    .setAttribute('alt', response.data.weather[0].description);
 }
 
 form.addEventListener('submit', function (event) {
   event.preventDefault();
   let inputText = document.querySelector('#input-text');
-  axios
-    .get(`${apiUrl}q=${inputText.value}&appid=${apiKey}&units=metric`)
-    .then(showTemperature);
+  search(inputText.value);
+  // axios
+  //   .get(`${apiUrl}q=${inputText.value}&appid=${apiKey}&units=metric`)
+  //   .then(showTemperature);
 });
 
 currentLocation.addEventListener('click', function () {
@@ -59,4 +76,23 @@ currentLocation.addEventListener('click', function () {
       .then(showTemperature);
   }
   navigator.geolocation.getCurrentPosition(showPosition);
+});
+
+let fahrenheitLink = document.querySelector('#fahrenheit-link');
+let celsiusLink = document.querySelector('#celsius-link');
+let temperatureElement = document.querySelector('#temperature');
+let celsiusTemperature = null;
+
+fahrenheitLink.addEventListener('click', function (event) {
+  event.preventDefault();
+  temperatureElement.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+  celsiusLink.classList.remove('active');
+  fahrenheitLink.classList.add('active');
+});
+
+celsiusLink.addEventListener('click', (event) => {
+  event.preventDefault();
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  celsiusLink.classList.add('active');
+  fahrenheitLink.classList.remove('active');
 });

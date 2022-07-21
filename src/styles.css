@@ -47,3 +47,15 @@ img {
   text-align: center;
   margin-top: 20px;
 }
+
+#description::first-letter {
+  text-transform: capitalize;
+}
+
+.active {
+  color: #111;
+  cursor: default;
+}
+.active:hover {
+  color: #111;
+}
