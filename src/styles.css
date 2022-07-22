@@ -12,10 +12,6 @@
   margin: 0;
 }
 
-img {
-  display: block;
-}
-
 .box {
   padding: 30px;
   border: 1px solid rgb(182, 182, 182);
@@ -73,11 +69,29 @@ img {
   margin-bottom: 0;
 }
 
-.row {
-  align-items: center;
-}
-
 #humidity,
 #wind {
   color: red;
+}
+
+.card {
+  height: 100%;
+}
+
+.weather-forecast-row {
+  justify-content: center;
+}
+
+.weather-forecast-content {
+  text-align: center;
+}
+
+.weather-forecast-date {
+  font-size: 18px;
+  color: #111;
+  opacity: 0.5;
+}
+
+.weather-forecast-temperature-min {
+  opacity: 0.5;
 }
