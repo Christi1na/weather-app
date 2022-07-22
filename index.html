@@ -17,7 +17,7 @@
   </head>
   <body>
     <div class="container">
-      <form class="row mb-3" id="form">
+      <form class="row mb-4" id="form">
         <div class="col-6 col-sm-8">
           <input
             type="text"
@@ -43,41 +43,48 @@
         </div>
       </form>
 
-      <div class="row mb-4">
+      <div class="row mb-2">
         <div class="col-7">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">
-                <span id="city">Dnipro</span> |
-                <span id="temperature">17</span>
-                <span class="links">
-                  <a class="link active" id="celsius-link" href="#">°C</a> |
-                  <a class="link" id="fahrenheit-link" href="#">°F</a>
-                </span>
-              </h5>
+              <h2 class="card-title">
+                <span id="city"></span>
+              </h2>
               <p class="card-text">
                 Last updated:
-                <span id="day">Monday</span>
-                <span id="hours">19</span>:<span id="minutes">00</span>
+                <span id="day"></span>
+                <span id="hours"></span>:<span id="minutes"></span>
               </p>
+
+              <p class="card-text">
+                Humidity: <span id="humidity"></span>, Wind:
+                <span id="wind"></span>
+              </p>
+              <p class="card-text" id="description"></p>
             </div>
           </div>
         </div>
         <div class="col-5">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body weather-info">
               <img
                 id="icon"
                 src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
                 alt=""
               />
-              <p class="card-text" id="description">Partly cloudy</p>
+              <h1 class="card-title temperature">
+                <span id="temperature"></span>
+                <span class="links">
+                  <a class="link active" id="celsius-link" href="#">°C</a> |
+                  <a class="link" id="fahrenheit-link" href="#">°F</a>
+                </span>
+              </h1>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="box">
+      <!-- <div class="box">
         <ul class="list-group list-group-horizontal">
           <li class="list-group-item">
             <p class="card-text">
@@ -130,7 +137,7 @@
             </p>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <div class="open-source">
       <a

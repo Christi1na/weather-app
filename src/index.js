@@ -56,6 +56,9 @@ function showTemperature(response) {
   document
     .querySelector('#icon')
     .setAttribute('alt', response.data.weather[0].description);
+  document.querySelector('#humidity').innerHTML =
+    response.data.main.humidity + '%';
+  document.querySelector('#wind').innerHTML = response.data.wind.speed + 'km/h';
 }
 
 form.addEventListener('submit', function (event) {
