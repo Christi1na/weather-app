@@ -34,6 +34,54 @@ let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?';
 let form = document.querySelector('#form');
 let currentLocation = document.querySelector('#current-location-button');
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector('#forecast');
+  let forecastHTML = `<div class="row weather-forecast-row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML += ` 
+          <div class="col-2 weather-forecast-content">
+            <div class="weather-forecast-date">${formatDay(
+              forecastDay.dt
+            )}</div>
+            <img
+              src='http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png'
+              width="70"
+              alt=""
+            />
+            <div class="weather-forecast-temperature">
+              <span class="weather-forecast-temperature-max">${Math.round(
+                forecastDay.temp.max
+              )}°</span>
+              <span class="weather-forecast-temperature-min">${Math.round(
+                forecastDay.temp.min
+              )}°</span>
+            </div>
+          </div>`;
+    }
+  });
+  forecastHTML += `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getCoordinates(coordinates) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function search(city) {
   axios
     .get(`${apiUrl}q=${city}&appid=${apiKey}&units=metric`)
@@ -59,11 +107,14 @@ function showTemperature(response) {
   document.querySelector('#humidity').innerHTML =
     response.data.main.humidity + '%';
   document.querySelector('#wind').innerHTML = response.data.wind.speed + 'km/h';
+
+  getCoordinates(response.data.coord);
 }
+
+let inputText = document.querySelector('#input-text');
 
 form.addEventListener('submit', function (event) {
   event.preventDefault();
-  let inputText = document.querySelector('#input-text');
   search(inputText.value);
   // axios
   //   .get(`${apiUrl}q=${inputText.value}&appid=${apiKey}&units=metric`)
