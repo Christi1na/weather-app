@@ -17,84 +17,86 @@
   </head>
   <body>
     <div class="container">
-      <form class="row mb-4" id="form">
-        <div class="col-6 col-sm-8">
-          <input
-            type="text"
-            class="form-control"
-            id="input-text"
-            placeholder="City name"
-            autocomplete="off"
-          />
-        </div>
-        <div class="col-3 col-sm-2">
-          <input
-            type="submit"
-            class="form-control btn btn-primary"
-            value="Search"
-          />
-        </div>
-        <div class="col-3 col-sm-2">
-          <button
-            class="form-control btn btn-success"
-            id="current-location-button"
-          >
-            Current
-          </button>
-        </div>
-      </form>
+      <div class="wrapper">
+        <form class="row mb-4" id="form">
+          <div class="col-6 col-sm-8">
+            <input
+              type="text"
+              class="form-control"
+              id="input-text"
+              placeholder="City name"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-3 col-sm-2">
+            <input
+              type="submit"
+              class="form-control btn btn-primary"
+              value="Search"
+            />
+          </div>
+          <div class="col-3 col-sm-2">
+            <button
+              class="form-control btn btn-success"
+              id="current-location-button"
+            >
+              Current
+            </button>
+          </div>
+        </form>
 
-      <div class="row mb-4">
-        <div class="col-7">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">
-                <span id="city"></span>
-              </h2>
-              <p class="card-text">
-                Last updated:
-                <span id="day"></span>
-                <span id="hours"></span>:<span id="minutes"></span>
-              </p>
+        <div class="row mb-4">
+          <div class="col-7">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">
+                  <span id="city"></span>
+                </h2>
+                <p class="card-text">
+                  Last updated:
+                  <span id="day"></span>
+                  <span id="hours"></span>:<span id="minutes"></span>
+                </p>
 
-              <p class="card-text">
-                Humidity: <span id="humidity"></span>, Wind:
-                <span id="wind"></span>
-              </p>
-              <p class="card-text" id="description"></p>
+                <p class="card-text">
+                  Humidity: <span id="humidity"></span>, Wind:
+                  <span id="wind"></span>
+                </p>
+                <p class="card-text" id="description"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="card">
+              <div class="card-body weather-info">
+                <img
+                  id="icon"
+                  src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+                  alt=""
+                />
+                <h1 class="card-title temperature">
+                  <span id="temperature"></span>
+                  <span class="links">
+                    <a class="link active" id="celsius-link" href="#">°C</a> |
+                    <a class="link" id="fahrenheit-link" href="#">°F</a>
+                  </span>
+                </h1>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-5">
-          <div class="card">
-            <div class="card-body weather-info">
-              <img
-                id="icon"
-                src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                alt=""
-              />
-              <h1 class="card-title temperature">
-                <span id="temperature"></span>
-                <span class="links">
-                  <a class="link active" id="celsius-link" href="#">°C</a> |
-                  <a class="link" id="fahrenheit-link" href="#">°F</a>
-                </span>
-              </h1>
-            </div>
-          </div>
-        </div>
+
+        <div class="weather-forecast" id="forecast"></div>
       </div>
-
-      <div class="weather-forecast mb-4" id="forecast"></div>
-    </div>
-    <div class="open-source">
-      <a
-        href="https://github.com/Christi1na/weather-app"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Open-source code</a
-      >
-      <span>, by Kristina Astaturian</span>
+      <div class="open-source">
+        <a
+          href="https://github.com/Christi1na/weather-app"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Open-source code</a
+        >
+        <span>, by Kristina Astaturian</span>
+      </div>
     </div>
 
     <script src="src/index.js"></script>
