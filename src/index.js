@@ -3,15 +3,7 @@ let hour = date.getHours();
 let minutes = date.getMinutes();
 let day = date.getDay();
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 let dayOfWeek = document.querySelector("#day");
 dayOfWeek.innerHTML = days[day];
@@ -29,7 +21,7 @@ if (getMinutes.innerHTML.length === 1) {
   getMinutes.innerHTML = `0${minutes}`;
 }
 
-let apiKey = "6a0bac9dced487830ce6066218a5481c";
+let apiKey = "ebcf4beea5ed40a740586eadf622aa14";
 let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
 let form = document.querySelector("#form");
 let currentLocation = document.querySelector("#current-location-button");
@@ -42,7 +34,8 @@ function formatDay(timestamp) {
 }
 
 function displayForecast(response) {
-  let forecast = response.data.daily;
+  console.log(response);
+  let forecast = response.data.list;
 
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row weather-forecast-row">`;
@@ -51,23 +44,15 @@ function displayForecast(response) {
     if (index < 5) {
       forecastHTML += ` 
           <div class="col-2 weather-forecast-content">
-            <div class="weather-forecast-date">${formatDay(
-              forecastDay.dt
-            )}</div>
+            <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
             <img
-              src='http://openweathermap.org/img/wn/${
-                forecastDay.weather[0].icon
-              }@2x.png'
+              src='http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png'
               width="70"
               alt=""
             />
             <div class="weather-forecast-temperature">
-              <span class="weather-forecast-temperature-max">${Math.round(
-                forecastDay.temp.max
-              )}°</span>
-              <span class="weather-forecast-temperature-min">${Math.round(
-                forecastDay.temp.min
-              )}°</span>
+              <span class="weather-forecast-temperature-max">${Math.round(forecastDay.main.temp_max)}°</span>
+              <span class="weather-forecast-temperature-min">${Math.round(forecastDay.main.temp_min)}°</span>
             </div>
           </div>`;
     }
@@ -78,34 +63,24 @@ function displayForecast(response) {
 }
 
 function getCoordinates(coordinates) {
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
 function search(city) {
-  axios
-    .get(`${apiUrl}q=${city}&appid=${apiKey}&units=metric`)
-    .then(showTemperature);
+  axios.get(`${apiUrl}q=${city}&appid=${apiKey}&units=metric`).then(showTemperature);
 }
 search("New York");
 
 function showTemperature(response) {
-  document.querySelector("#temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  document.querySelector("#temperature").innerHTML = Math.round(response.data.main.temp);
   celsiusTemperature = response.data.main.temp;
 
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
-  document.querySelector(
-    "#icon"
-  ).src = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
-  document
-    .querySelector("#icon")
-    .setAttribute("alt", response.data.weather[0].description);
-  document.querySelector("#humidity").innerHTML =
-    response.data.main.humidity + "%";
+  document.querySelector("#description").innerHTML = response.data.weather[0].description;
+  document.querySelector("#icon").src = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
+  document.querySelector("#icon").setAttribute("alt", response.data.weather[0].description);
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity + "%";
   document.querySelector("#wind").innerHTML = response.data.wind.speed + "km/h";
 
   getCoordinates(response.data.coord);
@@ -127,9 +102,7 @@ currentLocation.addEventListener("click", function () {
   function showPosition(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
-    axios
-      .get(`${apiUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
-      .then(showTemperature);
+    axios.get(`${apiUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`).then(showTemperature);
   }
   navigator.geolocation.getCurrentPosition(showPosition);
 });
